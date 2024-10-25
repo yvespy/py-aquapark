@@ -13,9 +13,9 @@ Its `__init__` method takes 2 values and stores them:
    - `max_amount` - max integer accessible value of the visitor's parameter
 
 Create `__get__()`, `__set__()` and `__set_name__()` methods.
-`__set__()` method has logic to validate that value is between `min_amount` and `max_amount` and will be used
-in Validator classes. Do not forget to check type of value before set it. You can rise TypeError or ValueError
-during validation. Message can be skipped for `raise`s.
+The `__set__()` method needs to have a logic to validate that the value is between `min_amount` and `max_amount` and will be used in Validator classes.
+Do not forget to check the type of value before setting it. You can raise TypeError or ValueError
+during validation. Error messages can be skipped.
 
 
 #### 2. `Visitor` class that is responsible for the user's personal data
@@ -23,8 +23,8 @@ Its `__init__` method takes `name`, `age`, `weight`, and `height`. `Visitor` doe
 
 
 #### 3. `SlideLimitationValidator` class, inherited from `ABC` class
-Its `__init__` method takes `age`, `weight`, and `height`. No additional abstract methods are needed here.
-No validation here need to be performed, it is just a base class for Validators.
+Its `__init__` method takes `age`, `weight`, and `height`. No additional abstract methods are required.
+This is a base class for Validators, so no validation is needed.
 
 
 #### 4. `ChildrenSlideLimitationValidator` and `AdultSlideLimitationValidator` classes, it's a limitation validators for slides 
@@ -46,11 +46,10 @@ These classes should be inherited from `SlideLimitationValidator`. No additional
 Its `__init__` method takes 2 arguments:
    - `name` - string value, slide's name
    - `limitation_class` - one of the `SlideLimitationValidator` child class which sets restrictions on the use of the Slide.
-Pay attention that constructor should only store class, not initiate instance of it.
-   
+   Please note that the constructor should only store the class itself and not instantiate an instance of it.   
 
-Create `can_access` method that takes instance of `Visitor` class and returns whether the visitor can use the slide (True or False).
-Here you need to create instance of `limitation_class` to perform validation by passing `Visitor`s attributes to it. You don't need to
-store instance anywhere. `can_access` should catch errors that `limitation_class` can raise.
+Create a method called `can_access` that checks whether a Visitor can use the slide, returning True or False.
+To validate the Visitor's attributes, create an instance of `limitation_class`. You don't need to store this instance anywhere.
+The `can_access` method should handle all possible errors that may be raised by the `limitation_class`.
 
 ### Note: Check your code using this [checklist](checklist.md) before pushing your solution.
